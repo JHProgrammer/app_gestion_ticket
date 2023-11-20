@@ -1,0 +1,18 @@
+{
+  "environment": "dev",
+
+  "bukrs": {
+    "subaccount1": {
+      "endpoint_cf": "https://api.cf.us10-001.hana.ondemand.com",
+      "org_cf": "07e76457trial",
+      "space_cf": "dev_front",
+      "first_deploy": false,
+      "deployer": true
+    }
+  },
+
+  "name_app": "appgestionticket",
+  "file_replace": {
+    "./config/constantes.js.base": "./gestionticket/webapp/constantes.js"
+  }
+}

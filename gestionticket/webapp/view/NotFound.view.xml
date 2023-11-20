@@ -1,0 +1,10 @@
+<mvc:View
+	controllerName="app.gestionticket.controller.NotFound"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<MessagePage
+		title="{i18n>titleNotFound}"
+		text="{i18n>textNotFound}"
+		description="{i18n>descriptionNotFound}"
+		/>
+</mvc:View>

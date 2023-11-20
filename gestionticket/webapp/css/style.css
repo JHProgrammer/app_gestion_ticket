@@ -1,0 +1,17 @@
+/* Enter your custom styles here */
+.objectAttribute {
+  padding-bottom: 14px;
+}
+.contenRowIconTable {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+}
+.bold {
+  font-weight: bold;
+}
+
+.texto-header{
+  margin-bottom: 10px;
+  font-weight: bold;
+}

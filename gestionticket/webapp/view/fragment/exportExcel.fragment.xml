@@ -1,0 +1,65 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:c="sap.ui.core"
+>
+	<Dialog
+		id="ExportarExcelFragment"
+		title="Exportar como"
+		icon="sap-icon://excel-attachment"
+		titleAlignment="Center"
+	>
+		<content>
+			<VBox class="sapUiSmallMargin">
+				<Label
+					text="Nombre de Fichero:"
+					class="lblfichero"
+				/>
+				<Input id="fileNameInput"/>
+				<Label
+					text="Formato:"
+					class="lblformato"
+				/>
+				<Select
+					id="slTipoExportData"
+					width="100%"
+					forceSelection="true"
+					change="onSelectChange"
+					items="{
+						path: 'localModel>/exportData'
+					}"
+					selectedKey="{
+						path: 'localModel>/selectExportData'
+					}"
+				>
+					<c:Item
+						key="{localModel>id}"
+						text="{localModel>name}"
+						enabled="{= ${localModel>id} === '0' ? false : true}"
+					/>
+				</Select>
+			</VBox>
+		</content>
+		<footer>
+			<Toolbar>
+				<content>
+					<Button
+						type="Emphasized"
+						icon="sap-icon://excel-attachment"
+						text="Exportar"
+						press="onExportarExcel"
+					/>
+					<ToolbarSpacer/>
+					<Button
+						type="Transparent"
+						icon="sap-icon://decline"
+						text="Cancelar"
+						press="onCloseExportExcel"
+					/>
+				</content>
+			</Toolbar>
+		</footer>
+	</Dialog>
+</core:FragmentDefinition>

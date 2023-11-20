@@ -1,0 +1,5 @@
+node_modules
+resources
+mta_archives
+*.mta
+dist

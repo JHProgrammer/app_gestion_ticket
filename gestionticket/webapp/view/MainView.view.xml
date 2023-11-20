@@ -1,0 +1,239 @@
+<mvc:View
+	controllerName="app.gestionticket.controller.MainView"
+	height="100%"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:layout="sap.ui.layout"
+	xmlns:main="sap.ui.webc.main"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:vm="sap.ui.comp.variants"
+	xmlns:unified="sap.ui.unified"
+>
+	<f:DynamicPage
+		id="dynamicPageId"
+		headerExpanded="{/headerExpanded}"
+		showFooter="false"
+	>
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="{i18n>gestiontickets}"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!-- DynamicPage Header -->
+		
+		<f:header>
+			<f:DynamicPageHeader pinnable="true">
+
+                    <HBox class="contentMessagetrip" >
+                     <MessageStrip text="Estimado Proveedor, si no visualiza su orden de compra, comuníquese con el área de Compras."
+				type="Success"
+				showIcon="true"
+				showCloseButton="true"
+				class="messagetrip"
+                id="msgStrip"
+                visible="false">
+            
+                </MessageStrip>
+                    </HBox>
+
+				<layout:HorizontalLayout allowWrapping="true">
+					
+					<layout:VerticalLayout class="datos">
+
+						<ObjectAttribute class="texto-header" title="Nombre" text="Guillermo Narvaez"/>
+                        
+						<ObjectAttribute class="texto-header" title="Cargo" text="Analista Full Stack" active="true" />                                            
+
+					</layout:VerticalLayout>                    
+
+                    <ToolbarSpacer />
+
+				</layout:HorizontalLayout>
+
+                <f:content>
+						<fb:FilterBar 
+	
+							reset="onLimpiarFiltros" 
+							clear="onLimpiarFiltros"
+							search="onSearch" 
+							useToolbar="false" 
+							showGoOnFB="true"
+							showAllFilters="true"
+							showClearOnFB="false"
+							showFilterConfiguration="true"
+							showRestoreButton="true"
+							showRestoreOnFB="true"
+
+							id="filterbar" persistencyKey="myPersKey" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+								<fb:filterGroupItems>
+
+									<fb:FilterGroupItem name="Consultor" label="Consultor" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										 <MultiComboBox
+									    placeholder="Seleccione"
+											id = "mcConsultorMainView"
+											width="18em"
+											selectionChange="handleSelectionChangeMV"
+											selectionFinish="handleSelectionFinishMV"
+											showSelectAll="true"
+											items="{
+												path: 'localModel>/listaConsultores'
+											}"
+											selectedKeys="{
+												path: 'localModel>/filtroConsultores'
+											}"
+											>							
+											<core:Item key="{localModel>ID}" text="{localModel>NOMBRE}"/>
+										</MultiComboBox>
+									</fb:control>
+								</fb:FilterGroupItem>
+									
+								<fb:FilterGroupItem name="Roles" label="Roles" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										 <MultiComboBox
+									    placeholder="Seleccione"
+											id = "mcRolMainView"
+											width="18em"
+											selectionChange="handleSelectionChangeMV"
+											selectionFinish="handleSelectionFinishMV"
+											showSelectAll="true"
+											items="{
+												path: 'localModel>/listaRoles'
+											}"
+											selectedKeys="{
+												path: 'localModel>/filtroRoles'
+											}"
+											>							
+											<core:Item key="{localModel>ID}" text="{localModel>NOMBRE}"/>
+										</MultiComboBox>
+									</fb:control>
+								</fb:FilterGroupItem>
+
+								<fb:FilterGroupItem name="PEP" label="PEP" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										 <MultiComboBox
+									    placeholder="Seleccione"
+											id = "mcPEPMainView"
+											width="18em"
+											selectionChange="handleSelectionChangeMV"
+											selectionFinish="handleSelectionFinishMV"
+											showSelectAll="true"
+											items="{
+												path: 'localModel>/listaPeps'
+											}"
+											selectedKeys="{
+												path: 'localModel>/filtroPeps'
+											}"
+											>							
+											<core:Item key="{localModel>ID}" text="{localModel>NOMBRE}"/>
+										</MultiComboBox>
+									</fb:control>
+								</fb:FilterGroupItem>
+							
+							</fb:filterGroupItems>
+						</fb:FilterBar>
+
+                        
+                    </f:content>
+
+			</f:DynamicPageHeader>
+
+		</f:header>
+
+		<!-- DynamicPage Footer -->
+<f:content>
+		
+		<VBox class="sapUiSmallMargin">
+		<HBox justifyContent="End" >
+		
+		<Button type="Default"
+							text="Crear"
+							press="onOpenDialogCrearAsignacion"
+                            icon="sap-icon://add"
+							ariaHasPopup="Dialog" />
+
+                           
+		 </HBox>
+		<PlanningCalendar
+			id="PC1"
+			startDate="{path: 'localModel>/gestionticket/startDate'}"
+			rows="{path: 'localModel>/gestionticket/people'}"
+			appointmentsVisualization="Filled"
+			appointmentSelect="handleAppointmentSelect"
+			showEmptyIntervalHeaders="false"
+			stickyHeader="true"
+			showWeekNumbers="true">
+			<toolbarContent>
+				<Title text="Planning" titleStyle="H4"/>
+			</toolbarContent>
+			<rows>
+				<PlanningCalendarRow
+					icon="{localModel>pic}"
+					title="{localModel>name}"
+					text="{localModel>role}"
+					id="idPlanningCalendarRow"
+					appointments="{path :'localModel>appointments', templateShareable: false}"
+					intervalHeaders="{path: 'localModel>headers', templateShareable: false}">
+					<appointments>
+						<unified:CalendarAppointment
+							id="idPlanningAppointment"
+							startDate="{localModel>start}"
+							endDate="{localModel>end}"
+							icon="{localModel>pic}"
+							title="{localModel>title}"
+							text="{localModel>info}"
+							type="{localModel>type}"
+							tentative="{localModel>tentative}">
+						</unified:CalendarAppointment>
+					</appointments>
+					<intervalHeaders>
+						<unified:CalendarAppointment
+							startDate="{localModel>start}"
+							endDate="{localModel>end}"
+							icon="{localModel>pic}"
+							title="{localModel>title}"
+							type="{localModel>type}">
+						</unified:CalendarAppointment>
+					</intervalHeaders>
+				</PlanningCalendarRow>
+			</rows>
+		</PlanningCalendar>
+		<!-- <Label text="Add available built-in views to the example:"/>
+		<MultiComboBox
+				selectionFinish="handleSelectionFinish"
+				width="230px"
+				placeholder="Choose built-in views">
+			<items>
+				<core:Item key="Hour" text="Hour" />
+				<core:Item key="Day" text="Day" />
+				<core:Item key="Month" text="Month" />
+				<core:Item key="Week" text="1 week" />
+				<core:Item key="One Month" text="1 month" />
+			</items>
+		</MultiComboBox> -->
+	</VBox>
+
+</f:content>
+		<f:footer>
+
+			<!-- <OverflowToolbar>
+
+				<ToolbarSpacer ></ToolbarSpacer>
+
+				<Button 
+				class="BottonCargarMasLista"
+				visible="{ path : 'localModel>/visibleButton' }"
+					type		=	"Transparent" 
+					text		=	"{i18n>mostarMasGestionticketPaginado} { path : 'localModel>/paginacionMasterCabecera' } "
+					press		=	"onPaginateMaestroCabeceraPaginado" />	
+
+			</OverflowToolbar> -->
+		
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

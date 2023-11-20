@@ -1,0 +1,61 @@
+{
+    "name": "gestionticket",
+    "version": "0.0.1",
+    "private": true,
+    "description": "A Fiori application.",
+    "keywords": [
+        "ui5",
+        "openui5",
+        "sapui5"
+    ],
+    "main": "webapp/index.html",
+    "dependencies": {},
+    "devDependencies": {
+        "@sapui5/ts-types": "1.71.x",
+        "@ui5/cli": "3.5.0",
+        "@sap/ui5-builder-webide-extension": "1.0.x",
+        "bestzip": "2.1.4",
+        "rimraf": "3.0.2",
+        "shx": "^0.3.2",
+        "ui5-middleware-livereload": "^0.4.1",
+        "karma": "^5.1.1",
+        "karma-chrome-launcher": "^3.1.0",
+        "karma-coverage": "^2.0.3",
+        "karma-ui5": "^2.2.0",
+        "npm-run-all": "^4.1.5",
+        "eslint": "^7.7.0",
+        "ui5-middleware-cfdestination": "^0.2.2",
+        "ui5-task-zipper": "^0.3.1",
+        "cross-var": "^1.1.0",
+        "mbt": "^1.0.16",
+        "@sap/xsenv" : "^4.0.0",
+        "@sap/e2e-trace" : "^3.2.0",
+        "@sap/logging" : "^6.2.0"
+    },
+    "scripts": {
+        "build": "npm run clean && ui5 build --include-task=generateManifestBundle generateCachebusterInfo && npm run zip",
+        "zip": "cd dist && npx bestzip ../gestionticket-content.zip *",
+        "clean": "npx rimraf gestionticket-content.zip dist",
+        "start": "ui5 serve --config=uimodule/ui5.yaml  --open index.html",
+        "build:ui": "run-s  build:uimodule",
+        "test": "run-s lint karma",
+        "karma-ci": "karma start karma-ci.conf.js",
+        "clearCoverage": "shx rm -rf coverage",
+        "karma": "run-s clearCoverage karma-ci",
+        "lint": "eslint .",
+        "build:mta": "mbt build",
+        "deploy:cf": "cross-var cf deploy mta_archives/gestionticket_0.0.1.mtar",
+        "deploy": "run-s build:mta deploy:cf",
+        "serve:uimodule": "ui5 serve --config=uimodule/ui5.yaml",
+        "build:uimodule": "ui5 build --config=uimodule/ui5.yaml --clean-dest --dest approuter/uimodule/webapp"
+
+    },
+    "sapuxLayer": "CUSTOMER_BASE",
+    "ui5": {
+        "dependencies": [
+            "@sap/ui5-builder-webide-extension",
+            "ui5-task-zipper",
+            "mbt"
+        ]
+    }
+}

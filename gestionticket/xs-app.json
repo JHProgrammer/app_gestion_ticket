@@ -1,0 +1,32 @@
+{
+  "welcomeFile": "/index.html",
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source": "^/resources/(.*)$",
+      "target": "/resources/$1",
+      "authenticationType": "none",
+      "destination": "ui5"
+    },
+     {
+      "authenticationType": "xsuaa",
+      "csrfProtection": false,
+      "source": "^/GestionTicket_SRV/(.*)$",
+      "destination": "GestionTicket_SRV",
+      "target": "$1"
+    },
+    {
+      "authenticationType": "xsuaa",
+      "csrfProtection": false,
+      "source": "^/dest-provapiseguridad/(.*)$",
+      "destination": "dest-provapiseguridad",
+      "target": "$1"
+    },
+    {
+      "source": "^(.*)$",
+      "target": "$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}

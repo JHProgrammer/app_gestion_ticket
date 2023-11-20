@@ -1,0 +1,168 @@
+{
+    "_version": "1.49.0",
+  "sap.app": {
+    "id": "app.gestionticket",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "html5moduletemplates.basicSAPUI5ApplicationProjectModule",
+			"version": "1.40.12"
+
+    },
+    "crossNavigation": {
+
+      "inbounds": {
+
+        "intent1": {
+
+          "signature": {
+
+            "parameters": {},
+
+            "additionalParameters": "allowed"
+
+          },
+
+          "semanticObject": "gestionticket",
+
+          "action": "display",
+
+          "title": "Gestionticket",
+
+          "info": "",
+
+          "subTitle": "",
+
+          "icon": "sap-icon://account"
+
+        }       
+
+      }
+
+    }
+  },
+  "sap.cloud": {
+      "public": true,
+      "service": "repo-app-gestionticket"
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+            "minUI5Version": "1.116.0",
+      "libs": {
+        "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "app.gestionticket.i18n.i18n"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "./css/style.css"
+        }
+      ],
+      "js": [
+        {
+          "uri": "./libs/moment.min.js"
+        }
+      ]
+    },
+    "resourceRoots": {
+      "it.designfuture.moment" : "./libs/moment.min"
+    },
+    "rootView": {
+      "viewName": "app.gestionticket.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "app.gestionticket.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false,
+
+        "bypassed": {
+					"target": "TargetNotFound"
+				}
+      },
+      "routes": [
+        {
+          "name": "RouteMainView",
+          "pattern": ":?query:",
+          "target": [
+            "TargetMainView"
+          ]
+        },
+        {
+          "name": "NoutFoundMainView",
+          "pattern": "TargetNotFound",
+          "target": ["TargetNotFound"]
+      }
+      ],
+      "targets": {
+				"TargetMainView": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "MainView",
+          "viewName": "MainView",
+          "viewLevel": 1
+        },
+				"TargetNotFound": {
+					"viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "NotFound",
+          "viewName": "NotFound",
+          "viewLevel": 0
+				}
+			}
+    }
+    
+    }
+    
+}

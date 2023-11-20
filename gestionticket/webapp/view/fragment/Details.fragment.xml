@@ -1,0 +1,26 @@
+<core:FragmentDefinition
+		xmlns="sap.m"
+		xmlns:f="sap.ui.layout.form"
+		xmlns:core="sap.ui.core">
+	<ResponsivePopover
+			id="detailsPopover"
+			title="{path: 'localModel>/asignacionSeleccionada/title'}"
+			class="sapUiContentPadding"
+			placement="Auto">
+		<beginButton>
+			<Button text="Eliminar" type="Emphasized" press="onDeleteAsignacion"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cerrar" press="handleCloseDetailAppointment"/>
+		</endButton>
+		<f:SimpleForm
+				editable="false"
+				layout="ResponsiveGridLayout"
+				singleContainerFullSize="false">
+			<Label text="Desde" labelFor="startDateText"/>
+			<Text id="startDateText" text="{path: 'localModel>/asignacionSeleccionada/start', formatter: '.formatDate'}"/>
+			<Label text="Hasta" labelFor="endDateText"/>
+			<Text id="endDateText" text="{path: 'localModel>/asignacionSeleccionada/end', formatter: '.formatDate'}"/>
+		</f:SimpleForm>
+	</ResponsivePopover>
+</core:FragmentDefinition>

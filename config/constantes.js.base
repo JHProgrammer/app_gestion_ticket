@@ -1,0 +1,26 @@
+/* global moment:true */
+sap.ui.define([], function () {
+  "use strict";
+  return {
+    ambiente: "qas",
+    isLocal: false,
+    idProyecto: "app.gestionticket",
+    urlApiGatewayLocal: "https://portalseidor-ms-gestionticket-base-dev.cfapps.us10-001.hana.ondemand.com/",
+    destApiGateway:
+      jQuery.sap.getModulePath("app.gestionticket") +
+      "/" +
+      "GestionTicket_SRV",
+    services: {
+      //Rol
+      obtenerRoles: "/rest/rol/obtenerRoles()",
+      //Peps
+      obtenerPeps: "/rest/pep/obtenerPeps()",
+      //Consultores
+      obtenerConsultores: "/rest/consultor/obtenerConsultores()",
+      //Gestionticket
+      obtenerGestionticketXFiltro: "/rest/asignacion/obtenerGestionticketXFiltro",
+      registrarAsignacion: "/rest/asignacion/registrarAsignacion",
+      eliminarAsignacion: "/rest/asignacion/eliminarAsignacion",
+    },
+  };
+});
